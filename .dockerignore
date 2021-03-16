@@ -1,0 +1,16 @@
+resources/
+*.md
+docker-compose.yml
+Dockerfile
+
+venv
+.idea
+.git
+**/.DS_Store
+requirements-dev.txt
+**/*.pyc
+**/.idea
+**/.vscode
+**/venv
+**/protobuf
+**/__pycache__
