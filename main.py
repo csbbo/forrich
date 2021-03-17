@@ -46,7 +46,6 @@ def get_user():
 @app.route('/', methods=['GET'])
 def query():
     search = request.args.getlist('s')
-    print(search)
     stocks = mongo.db.stocks.find({'$or': [
         {'short_pinyin': {'$in': search}},
         {'name': {'$in': search}},
