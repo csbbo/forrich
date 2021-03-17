@@ -5,6 +5,9 @@ services:
     image: mongo:4.2.9
     container_name: forrich_mongo
     restart: always
+    volumes:
+      - "./database/mongodb:/data/db"
+      # - "./data/mongo-entrypoint:/docker-entrypoint-initdb.d"
   server:
     image: forrich_server:latest
     container_name: forrich_server
