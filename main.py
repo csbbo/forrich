@@ -156,13 +156,22 @@ def demo():
 @app.route('/', methods=['GET'])
 def query():
     search = request.args.getlist('s')
-    filter = {'$or': [
-        {'pinyin': {'$in': search}},
-        {'name': {'$in': search}},
-        {'ts_code': {'$in': search}},
-        {'symbol': {'$in': search}},
-    ]}
-    stocks = mongo.db.stocks.find(filter)
+    if len(search) == 1:
+        search = search[0]
+        filt = {'$or': [
+            {'pinyin': {'$regex': search}},
+            {'name': {'$regex': search}},
+            {'ts_code': {'$regex': search}},
+            {'symbol': {'$regex': search}},
+        ]}
+    else:
+        filt = {'$or': [
+            {'pinyin': {'$in': search}},
+            {'name': {'$in': search}},
+            {'ts_code': {'$in': search}},
+            {'symbol': {'$in': search}},
+        ]}
+    stocks = mongo.db.stocks.find(filt)
 
     resp = []
     for stock in stocks:
