@@ -76,7 +76,7 @@ class Macd():
         if len(dif_list) < 20:
             return False
 
-        if dea_list[-2] < dif_list[-2] and dea_list[-1] > dif_list[-1] and abs(dea_list[-1]) < 0.05:
+        if dif_list[-2] < dea_list[-2] and dif_list[-1] > dea_list[-1] and abs(dea_list[-1]) < 0.05:
             return True
         return False
 
@@ -191,9 +191,10 @@ def self_selection():
     for history in historys:
         price_list = history.get('price')
         ts_code = history.get('ts_code')
+        code = ts_code.split('.')[0]
         macd = Macd(price_list, 26, 12, 9)
         if macd.pass_filter():
-            content += f'<tr><td>{ts_code}</td></tr>'
+            content += f'<tr><td>{code}</td></tr>'
     return f'<table style="width:20px; margin:auto">{content}</table>'
 
 
