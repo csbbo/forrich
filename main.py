@@ -12,6 +12,7 @@ import base64
 import logging
 
 
+logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
 # ================ init
@@ -131,7 +132,7 @@ def save_all_stocks_price_history():
 @scheduler.task('cron', id='scheduler_task', day_of_week='mon-fri', hour=15, minute=30)
 def scheduler_task():
     now_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime('%Y-%m-%d: %H:%M:%S')
-    print(f'task run in {now_time}')
+    logger.info(f'task run in {now_time}')
     save_stocks()
     save_all_stocks_price_history()
 
